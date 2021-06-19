@@ -1,0 +1,32 @@
+#spring.cloud.stream.function:
+#    function:
+#        definition: recipeProcessor, messageConsumer
+
+spring:
+    kafka:
+        properties:
+            bootstrap.servers: localhost:29092
+spring.cloud.stream:
+#  function:
+#      definition: produceChuckNorris,consumeChuckNorris
+  bindings:
+        # kafka producer
+        produceChuckNorris-out-0:
+            binder: kafka
+            destination: facts
+            group: thingo
+            producer:
+                partition-count: 2
+                useNativeEncoding: true
+#        consumeChuckNorris-in-0:
+#            binder: kafka
+#            destination: facts
+#            group: myGroup
+  kafka:
+    binder:
+        consumer-properties:
+            key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        producer-properties:
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: org.apache.kafka.common.serialization.StringSerializer
