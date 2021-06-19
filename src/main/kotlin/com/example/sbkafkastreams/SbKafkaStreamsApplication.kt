@@ -20,14 +20,14 @@ class SbKafkaStreamsApplication {
             MessageBuilder.withPayload(Faker.instance().chuckNorris().fact()).build()
         }
     }
-//    @Bean
-//    fun consumeChuckNorris(): Consumer<Message<String>>{
-//        println("EEEE")
-//        return Consumer { s:Message<String>->
+    @Bean
+    fun consumeChuckNorris(): Consumer<Message<String>>{
+        println("EEEE")
+        return Consumer { s:Message<String>->
 //            println("DDDDD")
-////            println("FACT: \u001B[3m = $s \u001B[0m")
-//        }
-//    }
+            println("FACT: \u001B[3m «" + s.payload + "\u001B[0m»")
+        }
+    }
 
 }
 

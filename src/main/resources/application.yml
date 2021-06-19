@@ -7,8 +7,8 @@ spring:
         properties:
             bootstrap.servers: localhost:29092
 spring.cloud.stream:
-#  function:
-#      definition: produceChuckNorris,consumeChuckNorris
+  function:
+      definition: produceChuckNorris;consumeChuckNorris
   bindings:
         # kafka producer
         produceChuckNorris-out-0:
@@ -18,10 +18,10 @@ spring.cloud.stream:
             producer:
                 partition-count: 2
                 useNativeEncoding: true
-#        consumeChuckNorris-in-0:
-#            binder: kafka
-#            destination: facts
-#            group: myGroup
+        consumeChuckNorris-in-0:
+            binder: kafka
+            destination: facts
+            group: myGroup
   kafka:
     binder:
         consumer-properties:
