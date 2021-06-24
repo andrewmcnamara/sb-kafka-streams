@@ -8,7 +8,10 @@ spring:
             bootstrap.servers: localhost:29092
 spring.cloud.stream:
   function:
-      definition: produceChuckNorris;consumeChuckNorris
+      definition: produceChuckNorris;consumeChuckNorris;processWords
+      bindings:
+          processWords-in-0: facts
+          processWords-out-0: counts
   bindings:
         # kafka producer
         produceChuckNorris-out-0:
@@ -30,3 +33,10 @@ spring.cloud.stream:
         producer-properties:
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: org.apache.kafka.common.serialization.StringSerializer
+    streams:
+        binder:
+            applicationId: chuck-norris-word-count-2
+            configuration:
+                default-key-serde:  org.apache.kafka.common.serialization.Serdes$StringSerde
+                default-value-serde:  org.apache.kafka.common.serialization.Serdes$StringSerde
+                commit-interval_ms: 1000
